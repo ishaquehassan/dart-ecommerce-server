@@ -100,13 +100,6 @@
             </list>
           </value>
         </entry>
-        <entry key="characters">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="charcode">
           <value>
             <list>
@@ -191,13 +184,6 @@
             </list>
           </value>
         </entry>
-        <entry key="flutter">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../../../Flutter/flutter/packages/flutter/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="frontend_server_client">
           <value>
             <list>
@@ -275,13 +261,6 @@
             </list>
           </value>
         </entry>
-        <entry key="material_color_utilities">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="meta">
           <value>
             <list>
@@ -310,13 +289,6 @@
             </list>
           </value>
         </entry>
-        <entry key="objectbox_flutter_libs">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/objectbox_flutter_libs-1.4.1/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="objectbox_generator">
           <value>
             <list>
@@ -338,80 +310,10 @@
             </list>
           </value>
         </entry>
-        <entry key="path_provider">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_android">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_ios">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_linux">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_macos">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_platform_interface">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.3/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="path_provider_windows">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="platform">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/platform-3.1.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="plugin_platform_interface">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="pool">
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="process">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/process-4.2.4/lib" />
             </list>
           </value>
         </entry>
@@ -447,13 +349,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-1.0.1/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="sky_engine">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../../../Flutter/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
         </entry>
@@ -520,13 +415,6 @@
             </list>
           </value>
         </entry>
-        <entry key="vector_math">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="watcher">
           <value>
             <list>
@@ -538,20 +426,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="win32">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.5.1/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="xdg_directories">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+1/lib" />
             </list>
           </value>
         </entry>
@@ -578,7 +452,6 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/build_runner_core-7.2.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/built_collection-5.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/built_value-8.1.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/checked_yaml-2.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/code_builder-4.1.0/lib" />
@@ -602,26 +475,14 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/logging-1.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/mime-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/mime_type-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/objectbox-1.4.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/objectbox_flutter_libs-1.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/objectbox_generator-1.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path-1.8.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.12/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.3/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/platform-3.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/process-4.2.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pub_semver-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/pubspec_parse-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/queue-3.1.0+1/lib" />
@@ -636,14 +497,9 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/timing-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/watcher-1.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/win32-2.5.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0/lib" />
-      <root url="file://$PROJECT_DIR$/../../../Flutter/flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$PROJECT_DIR$/../../../Flutter/flutter/packages/flutter/lib" />
       <root url="file://$PROJECT_DIR$/../lib" />
     </CLASSES>
     <JAVADOC />

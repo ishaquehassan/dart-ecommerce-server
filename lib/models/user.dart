@@ -9,34 +9,58 @@ class User extends BaseModel{
   String email;
   String phone;
   String password;
+  String? accessToken;
 
   User({this.id = 0,required this.email,required this.phone,required this.password});
 
-  static Box<User> box(){
-    var store = openStore();
-    Box<User> userBox = store.box<User>();
-    store.close();
-    return userBox;
+  static box(Function(Box<User> box) transaction){
+    store((store) => transaction(store.box<User>()));
   }
 
-
+  static store(Function(Store store) transaction){
+    var store = openStore();
+    transaction(store);
+    store.close();
+  }
 
   int save(){
-    var id  = box().put(this);
-    this.id = id;
+    box((box){
+      var id = box.put(this);
+      this.id = id;
+    });
     return id;
   }
 
-  static User? fromBox({int? id,String? email}){
+  static User? fromBox({int? id,String? email,String? password,String? phone,String? accessToken}){
     User? userData;
-    QueryBuilder<User>? user;
     if(id != null){
-      user = box().query(User_.id.equals(id));
+      userData = listFromBox().firstWhere((u) => u.id == id);
+    }else if(email != null && password != null){
+      userData = listFromBox().firstWhere((u) => u.email == email && u.password == password);
+    }else if(email != null && phone != null){
+      userData = listFromBox().firstWhere((u) => u.email == email && u.phone == phone);
     }else if(email != null){
-      user = box().query(User_.email.equals(email));
+      userData = listFromBox().firstWhere((u) => u.email == email);
+    }else if(phone != null){
+      userData = listFromBox().firstWhere((u) => u.phone == phone);
+    }else if(accessToken != null){
+      userData = listFromBox().firstWhere((u) => u.accessToken == accessToken);
     }
-    userData = user?.build().findFirst();
     return userData;
+  }
+
+  static List<User> listFromBox(){
+    List<User> users = [];
+    box((box) => users = box.getAll());
+    return users;
+  }
+
+  void delete(){
+    if(id != null){
+      box((box){
+        box.remove(id);
+      });
+    }
   }
 
   Map<String, dynamic> toMap() {
@@ -45,6 +69,7 @@ class User extends BaseModel{
       'email': this.email,
       'phone': this.phone,
       'password': this.password,
+      "accessToken":this.accessToken
     };
   }
 
@@ -53,7 +78,7 @@ class User extends BaseModel{
       id: map['id'] as int,
       email: map['email'] as String,
       phone: map['phone'] as String,
-      password: map['password'] as String,
+      password: map['password'] as String
     );
   }
 }
