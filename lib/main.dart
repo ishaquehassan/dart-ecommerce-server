@@ -1,7 +1,9 @@
 import 'package:alfred/alfred.dart';
 
+import 'router/apis.dart';
+
 void main() async {
-  final app = Alfred();
-  app.get('/', (req, res) => 'Text response');
+  var app = Alfred();
+  ApisRouter.init(app);
   await app.listen(9001);
 }
