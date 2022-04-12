@@ -20,7 +20,7 @@ class ApisRouter {
       return model.toMap();
     }catch(e){
       res.statusCode = 500;
-      return ResponseModel(e.toString()).toMap();
+      return ResponseModel(e.toString(),statusCode: res.statusCode).toMap();
     }
   }
 
