@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:alfred/alfred.dart';
 import 'package:alfred_test_project/base/base_response_model.dart';
@@ -66,6 +67,7 @@ class ApisRouter {
     var uc = UserController();
     app.post("user/signin", (req, res) async => reqBuilder(req, res, uc, () async => (await uc.signIn())));
     app.get("user/signout", (req, res) async => reqBuilder(req, res, uc, () async => (await uc.logout())),middleware: [(req,res) => authMiddleware(req,res,uc)]);
+    app.get("assets/images/:dir/:file", (req, res) => File("assets/${req.params['dir']}/${req.params['file']}"));
   }
 }
 

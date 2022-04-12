@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="30666797-160f-432a-b924-f247d1f26517" name="TI_RES">
+        <fileTransfer rootFolder="/var/www/html/pocketsystems/projects/techidara/res" accessType="SFTP" host="142.93.215.75" port="22" sshConfigId="ce06c735-7abd-40d3-9ba8-1bc2677548d9" sshConfig="root@142.93.215.75:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
