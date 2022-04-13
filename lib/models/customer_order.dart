@@ -2,6 +2,7 @@
 import 'package:alfred_test_project/base/base_model.dart';
 import 'package:alfred_test_project/models/product.dart';
 import 'package:alfred_test_project/models/user.dart';
+import 'package:alfred_test_project/storage/data_store.dart';
 import 'package:objectbox/objectbox.dart';
 import '../objectbox.g.dart';
 
@@ -26,7 +27,7 @@ class CustomerOrder extends BaseModel{
   }
 
   static store(Function(Store store) transaction) async{
-    var store = openStore();
+    var store = DataStore.getStore();
     transaction(store);
     await Future.delayed(Duration(milliseconds: 1));
     store.close();
