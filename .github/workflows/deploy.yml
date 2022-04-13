@@ -18,4 +18,4 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          script: cd ${{ secrets.PROJECT_PATH }} && git checkout -- . && git pull origin master && dart pub get && kill $(lsof -t -i:9001) && screen -d -m dart --packages=.dart_tool/package_config.json package:alfred_test_project/alfred_test_project.dart
+          script: cd ${{ secrets.PROJECT_PATH }} && git checkout -- . && git pull origin master && git checkout --ours . && git add -u && git commit -m "Done" && dart pub get && kill $(lsof -t -i:9001) && screen -d -m dart --packages=.dart_tool/package_config.json package:alfred_test_project/alfred_test_project.dart
