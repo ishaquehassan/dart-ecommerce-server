@@ -5,6 +5,7 @@ import 'package:alfred/alfred.dart';
 import 'package:alfred_test_project/base/base_response_model.dart';
 import 'package:alfred_test_project/base/response_model.dart';
 import 'package:alfred_test_project/controllers/categories_controller.dart';
+import 'package:alfred_test_project/controllers/order_controller.dart';
 import 'package:alfred_test_project/controllers/products_controller.dart';
 import 'package:alfred_test_project/models/user.dart';
 
@@ -19,7 +20,8 @@ class ApisRouter {
   Map<String, ApiController> get securedRoutes =>
       {
         "/category": CategoriesController(),
-        "/product": ProductsController()
+        "/product": ProductsController(),
+        "/order": OrderController(),
       };
 
   static Future<Map<String, dynamic>> reqBuilder(HttpRequest req,
@@ -131,5 +133,13 @@ class ApisRouter {
         "assets/images/:dir/:file",
         (req, res) =>
             File("assets/${req.params['dir']}/${req.params['file']}"));
+
+
+    var oc = OrderController();
+    app.get(
+        "user/orders",
+            (req, res) async =>
+            reqBuilder(req, res, oc, () async => (await oc.readByUserId())),
+        middleware: [(req, res) => authMiddleware(req, res, oc)]);
   }
 }

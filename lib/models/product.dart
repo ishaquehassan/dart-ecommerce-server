@@ -12,6 +12,7 @@ class Product extends BaseModel{
   int stockAvailable;
   String image;
   double price;
+  int? qty;
 
 
   Product({this.id = 0,required this.catId,required this.title,required this.unit, this.stockAvailable = 10,required this.image,
@@ -68,6 +69,7 @@ class Product extends BaseModel{
       'stockAvailable': stockAvailable,
       'image': image,
       'price': price,
+      'qty': qty,
     };
   }
 
@@ -80,6 +82,6 @@ class Product extends BaseModel{
       stockAvailable: map['stockAvailable'] as int,
       image: map['image'] as String,
       price: map['price'] as double,
-    );
+    )..qty = map.containsKey("qty") ? map['qty'] as int : null;
   }
 }
