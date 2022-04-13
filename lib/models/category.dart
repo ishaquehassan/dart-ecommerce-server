@@ -46,13 +46,21 @@ class Category extends BaseModel{
   }
 
   void delete(){
-    if(id != null){
-      box((box){
-        box.remove(id);
-      });
-    }
+    box((box){
+      box.remove(id);
+    });
   }
 
+  static bool exists(String id){
+    try{
+      return listFromBox().where((element) => element.id == int.parse(id)).isNotEmpty;
+    }catch(e){
+      print(e.toString());
+    }
+    return false;
+  }
+
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id,

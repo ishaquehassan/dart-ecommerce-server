@@ -1,10 +1,11 @@
+import 'dart:math' as Math;
+
 import 'package:alfred_test_project/base/response_list_model.dart';
 import 'package:alfred_test_project/base/response_model.dart';
 import 'package:alfred_test_project/models/user.dart';
 
 import '../base/api_controller.dart';
 import '../base/base_response_model.dart';
-import 'dart:math' as Math;
 
 class GUIDGen {
 

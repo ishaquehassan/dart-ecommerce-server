@@ -1,4 +1,4 @@
-import 'package:alfred_test_project/base/base_model.dart';
+
 
 class BaseResponseModel{
   final String message;

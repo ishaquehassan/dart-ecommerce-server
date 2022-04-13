@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:alfred/alfred.dart';
 import 'package:alfred_test_project/base/base_response_model.dart';
 import 'package:alfred_test_project/base/response_model.dart';
+import 'package:alfred_test_project/controllers/categories_controller.dart';
+import 'package:alfred_test_project/controllers/products_controller.dart';
 import 'package:alfred_test_project/models/user.dart';
 
 import '../base/api_controller.dart';
@@ -14,36 +16,51 @@ class ApisRouter {
         "/user": UserController(),
       };
 
-  static Future<Map<String,dynamic>> reqBuilder(HttpRequest req,HttpResponse res,ApiController controller,Function handler) async{
+  Map<String, ApiController> get securedRoutes =>
+      {
+        "/category": CategoriesController(),
+        "/product": ProductsController()
+      };
+
+  static Future<Map<String, dynamic>> reqBuilder(HttpRequest req,
+      HttpResponse res, ApiController controller, Function handler) async {
     controller
       ..request = req
       ..response = res;
-    try{
+    try {
       return (await handler()).toMap();
-    }on ResponseModel catch(model){
+    } on ResponseModel catch (model) {
       res.statusCode = model.statusCode;
       return model.toMap();
-    }catch(e){
+    } catch (e) {
       res.statusCode = 500;
-      return ResponseModel(e.toString(),statusCode: res.statusCode).toMap();
+      return ResponseModel(e.toString(), statusCode: res.statusCode).toMap();
     }
   }
 
-  static FutureOr authMiddleware(HttpRequest req, HttpResponse res,ApiController controller) {
+  static FutureOr authMiddleware(
+      HttpRequest req, HttpResponse res, ApiController controller) {
     if ((req.headers.value('authorization') ?? "").isEmpty) {
       res.statusCode = 403;
-      res.json(BaseResponseModel("Header Authentication is required",statusCode: 403).toMap());
+      res.json(BaseResponseModel("Header Authentication is required",
+              statusCode: 403)
+          .toMap());
       throw "Error";
     }
     User? authorizedUser;
-    try{
-      authorizedUser = User.fromBox(accessToken: (req.headers.value('authorization') ?? "").split(" ").last);
-    }catch(e){}
-    if(authorizedUser == null){
+    try {
+      authorizedUser = User.fromBox(
+          accessToken:
+              (req.headers.value('authorization') ?? "").split(" ").last);
+    } catch (e) {}
+    if (authorizedUser == null) {
       res.statusCode = 403;
-      res.json(BaseResponseModel("Header Authentication is incorrect. Kindly signin again and update the access token",statusCode: 403).toMap());
-     throw "Error";
-    }else{
+      res.json(BaseResponseModel(
+              "Header Authentication is incorrect. Kindly signin again and update the access token",
+              statusCode: 403)
+          .toMap());
+      throw "Error";
+    } else {
       controller.currentUser = authorizedUser;
     }
   }
@@ -52,23 +69,67 @@ class ApisRouter {
     var router = ApisRouter();
     _customRoutes(app);
     router.routes.forEach((path, controller) {
-      app.get(path, (req, res) async {
-
-        return (await controller.read()).toMap();
-      });
-      app.get("$path/:id", (req, res) async => reqBuilder(req, res, controller, () async => (await controller.read(id: int.parse(req.params['id'])))));
-      app.post(path, (req, res) async  => reqBuilder(req, res, controller, () async => (await controller.create())));
-      app.put("$path/:id", (req, res) async => reqBuilder(req, res, controller, () async => (await controller.update(int.parse(req.params['id'])))));
-      app.delete("$path/:id", (req, res) async => reqBuilder(req, res, controller, () async => (await controller.delete(int.parse(req.params['id'])))));
+      _buildRoutes(app,path,controller);
+    });
+    router.securedRoutes.forEach((path, controller) {
+      _buildRoutes(app,path,controller,isSecured: true);
     });
   }
 
-  static _customRoutes(Alfred app){
+  static _buildRoutes(Alfred app,String path,ApiController controller,{bool isSecured = false}){
+    app.get(
+        path,
+            (req, res) => reqBuilder(
+            req, res, controller, () async => (await controller.read())),
+        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+    app.get(
+        "$path/:id",
+            (req, res) async => reqBuilder(
+            req,
+            res,
+            controller,
+                () async =>
+            (await controller.read(id: int.parse(req.params['id'])))),
+        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+    app.post(
+        path,
+            (req, res) async => reqBuilder(
+            req, res, controller, () async => (await controller.create())),
+        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+    app.put(
+        "$path/:id",
+            (req, res) async => reqBuilder(
+            req,
+            res,
+            controller,
+                () async =>
+            (await controller.update(int.parse(req.params['id'])))),
+        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+    app.delete(
+        "$path/:id",
+            (req, res) async => reqBuilder(
+            req,
+            res,
+            controller,
+                () async =>
+            (await controller.delete(int.parse(req.params['id'])))),
+        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+  }
+
+  static _customRoutes(Alfred app) {
     var uc = UserController();
-    app.post("user/signin", (req, res) async => reqBuilder(req, res, uc, () async => (await uc.signIn())));
-    app.get("user/signout", (req, res) async => reqBuilder(req, res, uc, () async => (await uc.logout())),middleware: [(req,res) => authMiddleware(req,res,uc)]);
-    app.get("assets/images/:dir/:file", (req, res) => File("assets/${req.params['dir']}/${req.params['file']}"));
+    app.post(
+        "user/signin",
+        (req, res) async =>
+            reqBuilder(req, res, uc, () async => (await uc.signIn())));
+    app.get(
+        "user/signout",
+        (req, res) async =>
+            reqBuilder(req, res, uc, () async => (await uc.logout())),
+        middleware: [(req, res) => authMiddleware(req, res, uc)]);
+    app.get(
+        "assets/images/:dir/:file",
+        (req, res) =>
+            File("assets/${req.params['dir']}/${req.params['file']}"));
   }
 }
-
-
