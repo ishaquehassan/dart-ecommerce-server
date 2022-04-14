@@ -5,6 +5,11 @@ A simple command-line application.
 - [Alfred](https://pub.dev/packages/alfred) as a http listener
 - [ObjectBox](https://pub.dev/packages/objectbox) as a database
 
+### Fetch dependencies  ⬇️
+```shell
+dart pub get 
+```
+
 ### Run it locally 🚀
 ```shell
 dart lib/alfred_test_project.dart
