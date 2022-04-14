@@ -141,5 +141,12 @@ class ApisRouter {
             (req, res) async =>
             reqBuilder(req, res, oc, () async => (await oc.readByUserId())),
         middleware: [(req, res) => authMiddleware(req, res, oc)]);
+
+    var pc = ProductsController();
+    app.get(
+        "product/search",
+            (req, res) async =>
+            reqBuilder(req, res, oc, () async => (await pc.read(titleKeyword: req.uri.query))),
+        middleware: [(req, res) => authMiddleware(req, res, oc)]);
   }
 }

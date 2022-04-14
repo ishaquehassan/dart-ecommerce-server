@@ -54,7 +54,10 @@ class ProductsController extends ApiController {
   }
 
   @override
-  Future<BaseResponseModel> read({int? id}) async {
+  Future<BaseResponseModel> read({int? id,String? titleKeyword}) async {
+    if(titleKeyword != null){
+      return ResponseListModel("Success", data: Product.listFromBox().where((p) => p.title.toLowerCase().contains(titleKeyword.split("=").last.toLowerCase())).toList());
+    }
     if (id == null) {
       return ResponseListModel("Success", data: Product.listFromBox());
     }
