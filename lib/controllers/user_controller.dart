@@ -37,6 +37,7 @@ class UserController extends ApiController {
           email: body['email'],
           phone: body['phone'],
           password: body['password']);
+      user.accessToken = GUIDGen.generate();
       user.save();
       return ResponseModel("Success", data: user);
     } catch (e) {
