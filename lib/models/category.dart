@@ -5,57 +5,59 @@ import 'package:objectbox/objectbox.dart';
 import '../../objectbox.g.dart';
 
 @Entity()
-class Category extends BaseModel{
+class Category extends BaseModel {
   int id;
   String title;
   String icon;
 
-  Category({this.id = 0,required this.title,required this.icon});
+  Category({this.id = 0, required this.title, required this.icon});
 
-  static box(Function(Box<Category> box) transaction){
+  static box(Function(Box<Category> box) transaction) {
     store((store) => transaction(store.box<Category>()));
   }
 
-  static store(Function(Store store) transaction){
+  static store(Function(Store store) transaction) {
     var store = DataStore.getStore();
     transaction(store);
     store.close();
   }
 
-  int save(){
-    box((box){
+  int save() {
+    box((box) {
       var id = box.put(this);
       this.id = id;
     });
     return id;
   }
 
-  static Category? fromBox({int? id,String? title}){
+  static Category? fromBox({int? id, String? title}) {
     Category? catData;
-    if(id != null){
+    if (id != null) {
       catData = listFromBox().firstWhere((c) => c.id == id);
-    }else if(title != null){
+    } else if (title != null) {
       catData = listFromBox().firstWhere((c) => c.title == title);
     }
     return catData;
   }
 
-  static List<Category> listFromBox(){
+  static List<Category> listFromBox() {
     List<Category> categories = [];
     box((box) => categories = box.getAll());
     return categories;
   }
 
-  void delete(){
-    box((box){
+  void delete() {
+    box((box) {
       box.remove(id);
     });
   }
 
-  static bool exists(String id){
-    try{
-      return listFromBox().where((element) => element.id == int.parse(id)).isNotEmpty;
-    }catch(e){
+  static bool exists(String id) {
+    try {
+      return listFromBox()
+          .where((element) => element.id == int.parse(id))
+          .isNotEmpty;
+    } catch (e) {
       print(e.toString());
     }
     return false;

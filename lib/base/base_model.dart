@@ -1,3 +1,3 @@
-abstract class BaseModel{
-  Map<String,dynamic> toMap();
+abstract class BaseModel {
+  Map<String, dynamic> toMap();
 }

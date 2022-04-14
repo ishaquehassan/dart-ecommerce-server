@@ -17,8 +17,7 @@ class ApisRouter {
         "/user": UserController(),
       };
 
-  Map<String, ApiController> get securedRoutes =>
-      {
+  Map<String, ApiController> get securedRoutes => {
         "/category": CategoriesController(),
         "/product": ProductsController(),
         "/order": OrderController(),
@@ -71,51 +70,54 @@ class ApisRouter {
     var router = ApisRouter();
     _customRoutes(app);
     router.routes.forEach((path, controller) {
-      _buildRoutes(app,path,controller);
+      _buildRoutes(app, path, controller);
     });
     router.securedRoutes.forEach((path, controller) {
-      _buildRoutes(app,path,controller,isSecured: true);
+      _buildRoutes(app, path, controller, isSecured: true);
     });
   }
 
-  static _buildRoutes(Alfred app,String path,ApiController controller,{bool isSecured = false}){
+  static _buildRoutes(Alfred app, String path, ApiController controller,
+      {bool isSecured = false}) {
     app.get(
         path,
-            (req, res) => reqBuilder(
+        (req, res) => reqBuilder(
             req, res, controller, () async => (await controller.read())),
-        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+        middleware: [
+          if (isSecured) (req, res) => authMiddleware(req, res, controller)
+        ]);
     app.get(
         "$path/:id",
-            (req, res) async => reqBuilder(
+        (req, res) async => reqBuilder(
             req,
             res,
             controller,
-                () async =>
-            (await controller.read(id: int.parse(req.params['id'])))),
-        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+            () async =>
+                (await controller.read(id: int.parse(req.params['id'])))),
+        middleware: [
+          if (isSecured) (req, res) => authMiddleware(req, res, controller)
+        ]);
     app.post(
         path,
-            (req, res) async => reqBuilder(
+        (req, res) async => reqBuilder(
             req, res, controller, () async => (await controller.create())),
-        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+        middleware: [
+          if (isSecured) (req, res) => authMiddleware(req, res, controller)
+        ]);
     app.put(
         "$path/:id",
-            (req, res) async => reqBuilder(
-            req,
-            res,
-            controller,
-                () async =>
-            (await controller.update(int.parse(req.params['id'])))),
-        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+        (req, res) async => reqBuilder(req, res, controller,
+            () async => (await controller.update(int.parse(req.params['id'])))),
+        middleware: [
+          if (isSecured) (req, res) => authMiddleware(req, res, controller)
+        ]);
     app.delete(
         "$path/:id",
-            (req, res) async => reqBuilder(
-            req,
-            res,
-            controller,
-                () async =>
-            (await controller.delete(int.parse(req.params['id'])))),
-        middleware: [if(isSecured) (req, res) => authMiddleware(req, res, controller)]);
+        (req, res) async => reqBuilder(req, res, controller,
+            () async => (await controller.delete(int.parse(req.params['id'])))),
+        middleware: [
+          if (isSecured) (req, res) => authMiddleware(req, res, controller)
+        ]);
   }
 
   static _customRoutes(Alfred app) {
@@ -134,19 +136,18 @@ class ApisRouter {
         (req, res) =>
             File("assets/${req.params['dir']}/${req.params['file']}"));
 
-
     var oc = OrderController();
     app.get(
         "user/orders",
-            (req, res) async =>
+        (req, res) async =>
             reqBuilder(req, res, oc, () async => (await oc.readByUserId())),
         middleware: [(req, res) => authMiddleware(req, res, oc)]);
 
     var pc = ProductsController();
     app.get(
         "product/search",
-            (req, res) async =>
-            reqBuilder(req, res, oc, () async => (await pc.read(titleKeyword: req.uri.query))),
+        (req, res) async => reqBuilder(req, res, oc,
+            () async => (await pc.read(titleKeyword: req.uri.query))),
         middleware: [(req, res) => authMiddleware(req, res, oc)]);
   }
 }

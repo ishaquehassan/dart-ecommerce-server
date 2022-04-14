@@ -5,7 +5,7 @@ import 'package:objectbox/objectbox.dart';
 import '../../objectbox.g.dart';
 
 @Entity()
-class Product extends BaseModel{
+class Product extends BaseModel {
   int id;
   int catId;
   String title;
@@ -15,48 +15,55 @@ class Product extends BaseModel{
   double price;
   int? qty;
 
+  Product(
+      {this.id = 0,
+      required this.catId,
+      required this.title,
+      required this.unit,
+      this.stockAvailable = 10,
+      required this.image,
+      required this.price});
 
-  Product({this.id = 0,required this.catId,required this.title,required this.unit, this.stockAvailable = 10,required this.image,
-  required this.price});
-
-  static box(Function(Box<Product> box) transaction){
+  static box(Function(Box<Product> box) transaction) {
     store((store) => transaction(store.box<Product>()));
   }
 
-  static store(Function(Store store) transaction){
+  static store(Function(Store store) transaction) {
     var store = DataStore.getStore();
     transaction(store);
     store.close();
   }
 
-  int save(){
-    box((box){
+  int save() {
+    box((box) {
       var id = box.put(this);
       this.id = id;
     });
     return id;
   }
 
-  static Product? fromBox({int? id,String? title,int? catId}){
+  static Product? fromBox({int? id, String? title, int? catId}) {
     Product? prod;
-    if(id != null){
+    if (id != null) {
       prod = listFromBox().firstWhere((c) => c.id == id);
-    }else if(catId != null){
+    } else if (catId != null) {
       prod = listFromBox().firstWhere((c) => c.catId == catId);
-    }else if(title != null){
+    } else if (title != null) {
       prod = listFromBox().firstWhere((c) => c.title == title);
     }
     return prod;
   }
 
-  static List<Product> listFromBox({int? catId}){
+  static List<Product> listFromBox({int? catId}) {
     List<Product> products = [];
     box((box) => products = box.getAll());
-    return products.where((element) => catId != null ? element.catId == catId : true).toList();
+    return products
+        .where((element) => catId != null ? element.catId == catId : true)
+        .toList();
   }
 
-  void delete(){
-    box((box){
+  void delete() {
+    box((box) {
       box.remove(id);
     });
   }

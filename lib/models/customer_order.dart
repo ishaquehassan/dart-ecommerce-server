@@ -1,13 +1,13 @@
-
 import 'package:alfred_test_project/base/base_model.dart';
 import 'package:alfred_test_project/models/product.dart';
 import 'package:alfred_test_project/models/user.dart';
 import 'package:alfred_test_project/storage/data_store.dart';
 import 'package:objectbox/objectbox.dart';
+
 import '../objectbox.g.dart';
 
 @Entity()
-class CustomerOrder extends BaseModel{
+class CustomerOrder extends BaseModel {
   int id;
   final customer = ToOne<User>();
   final items = ToMany<Product>();
@@ -19,46 +19,56 @@ class CustomerOrder extends BaseModel{
   String city;
   String country;
 
-  CustomerOrder({this.id = 0,required this.name,required this.email,
-    required this.phoneNumber,required this.address,required this.zip,required this.city,required this.country});
+  CustomerOrder(
+      {this.id = 0,
+      required this.name,
+      required this.email,
+      required this.phoneNumber,
+      required this.address,
+      required this.zip,
+      required this.city,
+      required this.country});
 
-  static box(Function(Box<CustomerOrder> box) transaction){
+  static box(Function(Box<CustomerOrder> box) transaction) {
     store((store) => transaction(store.box<CustomerOrder>()));
   }
 
-  static store(Function(Store store) transaction) async{
+  static store(Function(Store store) transaction) async {
     var store = DataStore.getStore();
     transaction(store);
     await Future.delayed(Duration(milliseconds: 1));
     store.close();
   }
 
-  int save(){
-    box((box){
+  int save() {
+    box((box) {
       var id = box.put(this);
       this.id = id;
     });
     return id;
   }
 
-  static CustomerOrder? fromBox({int? id,int? uid}){
+  static CustomerOrder? fromBox({int? id, int? uid}) {
     CustomerOrder? orderData;
-    if(id != null){
+    if (id != null) {
       orderData = listFromBox().firstWhere((c) => c.id == id);
-    }else if(uid != null){
+    } else if (uid != null) {
       orderData = listFromBox().firstWhere((c) => c.customer.target?.id == uid);
     }
     return orderData;
   }
 
-  static List<CustomerOrder> listFromBox({int? uid}){
+  static List<CustomerOrder> listFromBox({int? uid}) {
     List<CustomerOrder> orders = [];
     box((box) => orders = box.getAll());
-    return orders.where((element) => uid != null ? element.customer.target?.id == uid : true).toList();
+    return orders
+        .where((element) =>
+            uid != null ? element.customer.target?.id == uid : true)
+        .toList();
   }
 
-  void delete(){
-    box((box){
+  void delete() {
+    box((box) {
       box.remove(id);
     });
   }
@@ -76,9 +86,9 @@ class CustomerOrder extends BaseModel{
       'country': country,
       'customer': customer.target?.toMap(),
     };
-    res['items'] = <Map<String,dynamic>>[];
+    res['items'] = <Map<String, dynamic>>[];
     for (var element in items) {
-      (res['items'] as List<Map<String,dynamic>>).add(element.toMap());
+      (res['items'] as List<Map<String, dynamic>>).add(element.toMap());
     }
     return res;
   }

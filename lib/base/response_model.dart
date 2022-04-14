@@ -8,7 +8,7 @@ class ResponseModel<D extends BaseModel> extends BaseResponseModel {
       : super(message, statusCode: statusCode);
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> responseData =  super.toMap();
+    Map<String, dynamic> responseData = super.toMap();
     if (data?.toMap() != null) {
       responseData['data'] = data?.toMap();
     }

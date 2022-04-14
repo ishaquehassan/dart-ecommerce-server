@@ -73,7 +73,8 @@ class OrderController extends ApiController {
 
   Future<BaseResponseModel> readByUserId() async {
     try {
-      return ResponseListModel("Success", data: CustomerOrder.listFromBox(uid: currentUser?.id));
+      return ResponseListModel("Success",
+          data: CustomerOrder.listFromBox(uid: currentUser?.id));
     } catch (e) {
       throw ResponseModel("Orders not found", statusCode: 404);
     }

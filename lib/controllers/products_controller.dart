@@ -13,8 +13,9 @@ class ProductsController extends ApiController {
     if (body.hasEmptyValue("catId")) {
       throw ResponseModel("Please enter a category id", statusCode: 422);
     }
-    if(!Category.exists(body['catId'])){
-      throw ResponseModel("Please enter a category id that exists", statusCode: 404);
+    if (!Category.exists(body['catId'])) {
+      throw ResponseModel("Please enter a category id that exists",
+          statusCode: 404);
     }
     if (body.hasEmptyValue("title")) {
       throw ResponseModel("Please enter a valid title", statusCode: 422);
@@ -35,7 +36,8 @@ class ProductsController extends ApiController {
     Product? existingTitleCheck;
     try {
       existingTitleCheck = Product.fromBox(title: body['title']);
-    }catch(e){} finally {
+    } catch (e) {
+    } finally {
       if (existingTitleCheck != null) {
         throw ResponseModel("Product already exists with same title",
             statusCode: 409);
@@ -43,8 +45,13 @@ class ProductsController extends ApiController {
     }
 
     try {
-      Product prod = Product(catId: int.parse(body['catId']),
-          title: body['title'], image: body['image'], unit: body['unit'], price: double.parse(body['price']),stockAvailable: int.parse(body['stockAvailable']));
+      Product prod = Product(
+          catId: int.parse(body['catId']),
+          title: body['title'],
+          image: body['image'],
+          unit: body['unit'],
+          price: double.parse(body['price']),
+          stockAvailable: int.parse(body['stockAvailable']));
       prod.save();
       return ResponseModel("Success", data: prod);
     } catch (e) {
@@ -54,9 +61,14 @@ class ProductsController extends ApiController {
   }
 
   @override
-  Future<BaseResponseModel> read({int? id,String? titleKeyword}) async {
-    if(titleKeyword != null){
-      return ResponseListModel("Success", data: Product.listFromBox().where((p) => p.title.toLowerCase().contains(titleKeyword.split("=").last.toLowerCase())).toList());
+  Future<BaseResponseModel> read({int? id, String? titleKeyword}) async {
+    if (titleKeyword != null) {
+      return ResponseListModel("Success",
+          data: Product.listFromBox()
+              .where((p) => p.title
+                  .toLowerCase()
+                  .contains(titleKeyword.split("=").last.toLowerCase()))
+              .toList());
     }
     if (id == null) {
       return ResponseListModel("Success", data: Product.listFromBox());
