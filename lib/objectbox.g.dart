@@ -86,7 +86,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 5308136717400361620),
       name: 'Product',
-      lastPropertyId: const IdUid(8, 6549784868475348020),
+      lastPropertyId: const IdUid(9, 2132929357438371420),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -128,6 +128,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(8, 6549784868475348020),
             name: 'qty',
             type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 2132929357438371420),
+            name: 'color',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -326,7 +331,8 @@ ModelDefinition getObjectBoxModel() {
           final titleOffset = fbb.writeString(object.title);
           final unitOffset = fbb.writeString(object.unit);
           final imageOffset = fbb.writeString(object.image);
-          fbb.startTable(9);
+          final colorOffset = fbb.writeString(object.color);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.catId);
           fbb.addOffset(2, titleOffset);
@@ -335,6 +341,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(5, imageOffset);
           fbb.addFloat64(6, object.price);
           fbb.addInt64(7, object.qty);
+          fbb.addOffset(8, colorOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -353,6 +360,8 @@ ModelDefinition getObjectBoxModel() {
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0),
               image: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 14, ''),
+              color: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 20, ''),
               price:
                   const fb.Float64Reader().vTableGet(buffer, rootOffset, 16, 0))
             ..qty = const fb.Int64Reader()
@@ -488,6 +497,9 @@ class Product_ {
 
   /// see [Product.qty]
   static final qty = QueryIntegerProperty<Product>(_entities[2].properties[7]);
+
+  /// see [Product.color]
+  static final color = QueryStringProperty<Product>(_entities[2].properties[8]);
 }
 
 /// [CustomerOrder] entity fields to define ObjectBox queries.

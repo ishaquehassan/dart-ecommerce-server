@@ -1,5 +1,6 @@
 import 'package:alfred_test_project/base/response_list_model.dart';
 import 'package:alfred_test_project/base/response_model.dart';
+import 'package:alfred_test_project/base/utils.dart';
 
 import '../base/api_controller.dart';
 import '../base/base_response_model.dart';
@@ -49,6 +50,7 @@ class ProductsController extends ApiController {
           catId: int.parse(body['catId']),
           title: body['title'],
           image: body['image'],
+          color: (await getImageColor(body['image'])) ?? "",
           unit: body['unit'],
           price: double.parse(body['price']),
           stockAvailable: int.parse(body['stockAvailable']));
@@ -95,6 +97,7 @@ class ProductsController extends ApiController {
     }
     if (!body.hasEmptyValue("image")) {
       prod.image = body['image'];
+      prod.color = (await getImageColor(prod.image)) ?? "";
     }
     if (!body.hasEmptyValue("unit")) {
       prod.unit = body['unit'];

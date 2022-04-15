@@ -12,6 +12,7 @@ class Product extends BaseModel {
   String unit;
   int stockAvailable;
   String image;
+  String color;
   double price;
   int? qty;
 
@@ -22,6 +23,7 @@ class Product extends BaseModel {
       required this.unit,
       this.stockAvailable = 10,
       required this.image,
+      required this.color,
       required this.price});
 
   static box(Function(Box<Product> box) transaction) {
@@ -76,6 +78,7 @@ class Product extends BaseModel {
       'unit': unit,
       'stockAvailable': stockAvailable,
       'image': image,
+      'color': color,
       'price': price,
       'qty': qty,
     };
@@ -89,6 +92,7 @@ class Product extends BaseModel {
       unit: map['unit'] as String,
       stockAvailable: map['stockAvailable'] as int,
       image: map['image'] as String,
+      color: map['color'] as String,
       price: map['price'] as double,
     )..qty = map.containsKey("qty") ? map['qty'] as int : null;
   }
