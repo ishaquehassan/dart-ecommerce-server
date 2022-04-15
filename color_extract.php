@@ -6,10 +6,13 @@ if(empty($url)){
 }
 include_once("colors.inc.php");
 $ex=new GetMostCommonColors();
-file_put_contents("temp.png",file_get_contents($url));
-$colors=$ex->Get_Color("temp.png");
+$expUrl = explode(".",$url);
+$tmpName = "temp.".$expUrl[count($expUrl)-1];
+file_put_contents($tmpName,file_get_contents($url));
+$colors=$ex->Get_Color($tmpName);
 foreach ($colors as $color => $amount){
     if("$color" != "000000"){
+        unlink($tmpName);
         die("#$color");
     }
 }
