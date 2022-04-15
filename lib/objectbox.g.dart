@@ -57,7 +57,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 8434588632493662923),
       name: 'Category',
-      lastPropertyId: const IdUid(3, 4428559967660920730),
+      lastPropertyId: const IdUid(4, 8058241557213352036),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -73,6 +73,11 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(3, 4428559967660920730),
             name: 'icon',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 8058241557213352036),
+            name: 'color',
             type: 9,
             flags: 0)
       ],
@@ -285,10 +290,12 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (Category object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
           final iconOffset = fbb.writeString(object.icon);
-          fbb.startTable(4);
+          final colorOffset = fbb.writeString(object.color);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, iconOffset);
+          fbb.addOffset(3, colorOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -301,7 +308,9 @@ ModelDefinition getObjectBoxModel() {
               title: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
               icon: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''));
+                  .vTableGet(buffer, rootOffset, 8, ''),
+              color: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 10, ''));
 
           return object;
         }),
@@ -446,6 +455,10 @@ class Category_ {
 
   /// see [Category.icon]
   static final icon = QueryStringProperty<Category>(_entities[1].properties[2]);
+
+  /// see [Category.color]
+  static final color =
+      QueryStringProperty<Category>(_entities[1].properties[3]);
 }
 
 /// [Product] entity fields to define ObjectBox queries.

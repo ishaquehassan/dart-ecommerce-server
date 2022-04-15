@@ -1,5 +1,6 @@
 import 'package:alfred_test_project/base/response_list_model.dart';
 import 'package:alfred_test_project/base/response_model.dart';
+import 'package:alfred_test_project/base/utils.dart';
 
 import '../base/api_controller.dart';
 import '../base/base_response_model.dart';
@@ -27,7 +28,7 @@ class CategoriesController extends ApiController {
     }
 
     try {
-      Category cat = Category(title: body['title'], icon: body['icon']);
+      Category cat = Category(title: body['title'], icon: body['icon'],color: (await getImageColor(body['icon']) ?? ""));
       cat.save();
       return ResponseModel("Success", data: cat);
     } catch (e) {
@@ -61,6 +62,7 @@ class CategoriesController extends ApiController {
     }
     if (!body.hasEmptyValue("icon")) {
       cat.icon = body['icon'];
+      cat.color = (await getImageColor(cat.icon) ?? "");
     }
     try {
       cat.save();

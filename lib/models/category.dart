@@ -9,8 +9,9 @@ class Category extends BaseModel {
   int id;
   String title;
   String icon;
+  String color;
 
-  Category({this.id = 0, required this.title, required this.icon});
+  Category({this.id = 0, required this.title, required this.icon,required this.color});
 
   static box(Function(Box<Category> box) transaction) {
     store((store) => transaction(store.box<Category>()));
@@ -69,6 +70,7 @@ class Category extends BaseModel {
       'id': id,
       'title': title,
       'icon': icon,
+      'color': color,
     };
   }
 
@@ -77,6 +79,7 @@ class Category extends BaseModel {
       id: map['id'] as int,
       title: map['title'] as String,
       icon: map['icon'] as String,
+      color: map['color'] as String,
     );
   }
 }
