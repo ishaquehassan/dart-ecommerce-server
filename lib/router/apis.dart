@@ -134,8 +134,7 @@ class ApisRouter {
         middleware: [(req, res) => authMiddleware(req, res, uc)]);
     app.get(
         "assets/images/:dir/:file",
-        (req, res) =>
-            File("assets/${req.params['dir']}/${req.params['file']}"));
+        (req, res) => File("${Directory.current.path}/assets/${req.params['dir']}/${req.params['file']}"));
 
     var oc = OrderController();
     app.get(
