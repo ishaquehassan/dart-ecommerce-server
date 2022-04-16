@@ -114,7 +114,8 @@ class ApisRouter {
     app.delete(
         "$path/:id",
         (req, res) async => reqBuilder(req, res, controller,
-            () async => (await controller.delete(int.parse(req.params['id'])))),
+            () async => throw ResponseModel("Ab nh krnai dnga delete 😎", statusCode: 403) //(await controller.delete(int.parse(req.params['id'])))
+        ),
         middleware: [
           if (isSecured) (req, res) => authMiddleware(req, res, controller)
         ]);
