@@ -113,7 +113,7 @@ class ProductsController extends ApiController {
       prod.stockAvailable = int.parse(body['stockAvailable']);
     }
     try {
-      prod.save();
+      //prod.save();
       return ResponseModel("Success - But its a demo update request so it will not update data 😎", data: prod);
     } catch (e) {
       throw ResponseModel("Unable to save Product. Reason: ${e.toString()}",
