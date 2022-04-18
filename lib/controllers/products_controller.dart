@@ -46,16 +46,20 @@ class ProductsController extends ApiController {
     }
 
     try {
+      String color = (await getImageColor(body['image']) ?? "");
+      if(color[0] != "#"){
+        throw ResponseModel("Please enter a valid image URL", statusCode: 422);
+      }
       Product prod = Product(
           catId: int.parse(body['catId']),
           title: body['title'],
           image: body['image'],
-          color: (await getImageColor(body['image'])) ?? "",
+          color: color,
           unit: body['unit'],
           price: double.parse(body['price']),
           stockAvailable: int.parse(body['stockAvailable']));
-      prod.save();
-      return ResponseModel("Success", data: prod);
+      //prod.save();
+      return ResponseModel("Success - But its a demo update request so it will not create data 😎", data: prod);
     } catch (e) {
       throw ResponseModel("Unable to save Product. Reason: ${e.toString()}",
           statusCode: 500);
@@ -109,8 +113,8 @@ class ProductsController extends ApiController {
       prod.stockAvailable = int.parse(body['stockAvailable']);
     }
     try {
-      prod.save();
-      return ResponseModel("Success", data: prod);
+      //prod.save();
+      return ResponseModel("Success - But its a demo update request so it will not update data 😎", data: prod);
     } catch (e) {
       throw ResponseModel("Unable to save Product. Reason: ${e.toString()}",
           statusCode: 500);

@@ -28,9 +28,13 @@ class CategoriesController extends ApiController {
     }
 
     try {
-      Category cat = Category(title: body['title'], icon: body['icon'],color: (await getImageColor(body['icon']) ?? ""));
-      cat.save();
-      return ResponseModel("Success", data: cat);
+      String color = (await getImageColor(body['icon']) ?? "");
+      if(color[0] != "#"){
+        throw ResponseModel("Please enter a valid icon", statusCode: 422);
+      }
+      Category cat = Category(title: body['title'], icon: body['icon'],color: color);
+      //cat.save();
+      return ResponseModel("Success - But its a demo update request so it will not create data 😎", data: cat);
     } catch (e) {
       throw ResponseModel("Unable to save Category. Reason: ${e.toString()}",
           statusCode: 500);
@@ -65,8 +69,8 @@ class CategoriesController extends ApiController {
       cat.color = (await getImageColor(cat.icon) ?? "");
     }
     try {
-      cat.save();
-      return ResponseModel("Success", data: cat);
+      //cat.save();
+      return ResponseModel("Success - But its a demo update request so it will not update data 😎", data: cat);
     } catch (e) {
       throw ResponseModel("Unable to save category. Reason: ${e.toString()}",
           statusCode: 500);

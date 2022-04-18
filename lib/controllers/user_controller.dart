@@ -76,8 +76,8 @@ class UserController extends ApiController {
       user.password = body['password'];
     }
     try {
-      user.save();
-      return ResponseModel("Success", data: user);
+      //user.save();
+      return ResponseModel("Success - But its a demo update request so it will not update data 😎", data: user);
     } catch (e) {
       throw ResponseModel("Unable to save user. Reason: ${e.toString()}",
           statusCode: 500);
